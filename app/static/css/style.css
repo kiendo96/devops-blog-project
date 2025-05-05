@@ -1,17 +1,10 @@
-/* app/static/css/style.css */
 body {
     font-family: sans-serif;
     line-height: 1.6;
-    /* background-color: #f8f9fa; */ /* Light gray background from Bootstrap */
 }
 
 .container {
-    max-width: 960px; /* Giới hạn chiều rộng nội dung */
-    /* margin: 2rem auto; */ /* Căn giữa và tạo khoảng cách */
-    /* background-color: #ffffff; */ /* Nền trắng cho nội dung */
-    /* padding: 2rem; */
-    /* border-radius: 5px; */
-    /* box-shadow: 0 0 10px rgba(0,0,0,0.1); */
+    max-width: 960px;
 }
 
 a {
@@ -23,13 +16,11 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Thêm các style khác nếu bạn muốn */
-/* Ví dụ: style cho code block nếu bài viết có code */
 pre {
     background-color: #eee;
     padding: 10px;
     border: 1px solid #ccc;
-    overflow-x: auto; /* Cho phép cuộn ngang nếu code dài */
+    overflow-x: auto; 
     border-radius: 4px;
 }
 
@@ -37,43 +28,38 @@ code {
     font-family: monospace;
 }
 
-/* Responsive images */
+
 img {
     max-width: 100%;
     height: auto;
 }
 
-/* --- Global Styles (Ví dụ) --- */
 body {
-    font-family: sans-serif; /* Thay bằng font bạn muốn */
+    font-family: sans-serif; 
     line-height: 1.6;
 }
 
 a {
-    color: #0d6efd; /* Màu link Bootstrap mặc định */
+    color: #0d6efd;
     text-decoration: none;
 }
 a:hover {
     text-decoration: underline;
 }
 
-/* --- Section Styling (Ví dụ) --- */
+
 .section-padding {
-    padding-top: 4rem; /* Tạo khoảng cách giữa các section */
+    padding-top: 4rem; 
     padding-bottom: 4rem;
 }
 
-/* --- Hero Section Styling (Ví dụ) --- */
+
 .hero-section {
-    /* background-color: #212529; /* Màu tối cho hero */ */
-    /* Thêm ảnh nền nếu muốn */
-    /* background-image: url('/static/images/hero-background.jpg'); */
-    /* background-size: cover; */
-    /* background-position: center; */
+    
 }
 
 .hero-section h1 {
-    font-weight: 700; /* Chữ đậm hơn */
+    font-weight: 700; 
     margin-bottom: 1rem;
 }
 
@@ -82,100 +68,94 @@ a:hover {
     margin-bottom: 2rem;
 }
 
-/* --- Card Styling (Bootstrap đã có sẵn, có thể tùy chỉnh thêm) --- */
+
 .card {
-    border: 1px solid rgba(0,0,0,.125); /* Thêm viền nhẹ */
-    transition: box-shadow .2s ease-in-out; /* Hiệu ứng khi hover */
+    border: 1px solid rgba(0,0,0,.125); 
+    transition: box-shadow .2s ease-in-out; 
 }
 .card:hover {
-     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15); /* Đổ bóng khi hover */
+     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15); 
 }
 
-/* --- Styling cho trang Projects --- */
 
-/* Tạo khoảng cách cho toàn bộ section danh sách dự án */
-.projects-section { /* Bạn có thể cần thêm class="projects-section" vào thẻ <section> hoặc <div> bao ngoài grid trong projects.html nếu muốn target cụ thể hơn */
+.projects-section { 
     padding-top: 3rem;
     padding-bottom: 4rem;
-    /* background-color: #f8f9fa; */ /* Ví dụ: đổi màu nền nhẹ */
+    
 }
 
 .projects-section h1 {
-    margin-bottom: 2.5rem; /* Tăng khoảng cách dưới tiêu đề trang */
-    font-weight: bold; /* Có thể làm tiêu đề đậm hơn */
-    text-align: center; /* Căn giữa tiêu đề */
+    margin-bottom: 2.5rem; 
+    font-weight: bold; 
+    text-align: center; 
 }
 
-/* --- Styling cho từng Card Dự án --- */
+
 .projects-section .card {
-    border: none; /* Bỏ viền mặc định của card */
-    border-radius: 8px; /* Bo góc nhẹ */
-    margin-bottom: 1.5rem; /* Khoảng cách giữa các card nếu chúng không nằm trên cùng hàng grid */
-    overflow: hidden; /* Đảm bảo ảnh không tràn ra ngoài khi bo góc */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Hiệu ứng khi di chuột */
-    background-color: #ffffff; /* Màu nền card */
+    border: none; 
+    border-radius: 8px; 
+    margin-bottom: 1.5rem; 
+    overflow: hidden; 
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+    background-color: #ffffff; 
 }
 
 .projects-section .card:hover {
-    transform: translateY(-5px); /* Hơi nâng card lên khi di chuột */
-    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1); /* Đổ bóng rõ hơn khi di chuột */
+    transform: translateY(-5px); 
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1); 
 }
 
-/* Styling ảnh dự án */
+
 .projects-section .card-img-top {
-    /* Giữ tỷ lệ khung hình 16:9 và đảm bảo ảnh vừa vặn */
+    
     aspect-ratio: 16 / 9;
-    object-fit: cover; /* Cắt ảnh để vừa khung, thay vì làm méo ảnh */
-    border-bottom: 1px solid #eee; /* Có thể thêm đường kẻ mỏng dưới ảnh */
+    object-fit: cover; 
+    border-bottom: 1px solid #eee; 
 }
 
-/* Styling phần thân card */
+
 .projects-section .card-body {
-    padding: 1.25rem; /* Tăng padding bên trong card */
+    padding: 1.25rem; 
 }
 
 .projects-section .card-title {
-    font-size: 1.2rem; /* Kích thước tiêu đề dự án */
-    font-weight: 600; /* Độ đậm tiêu đề */
+    font-size: 1.2rem; 
+    font-weight: 600; 
     margin-bottom: 0.75rem;
 }
 
 .projects-section .card-title a {
-    color: #333; /* Màu tiêu đề */
+    color: #333; 
     text-decoration: none;
 }
 .projects-section .card-title a:hover {
-    color: #0056b3; /* Màu tiêu đề khi hover */
+    color: #0056b3; 
     text-decoration: none;
 }
 
 
 .projects-section .card-text {
-    font-size: 0.9rem; /* Cỡ chữ mô tả */
-    color: #555; /* Màu chữ mô tả */
+    font-size: 0.9rem; 
+    color: #555; 
     margin-bottom: 1rem;
 }
 
-/* Styling phần công nghệ (nếu có) */
+
 .projects-section .card-text .text-muted {
-    font-size: 0.8rem; /* Cỡ chữ nhỏ hơn cho phần công nghệ */
-    /* Có thể thêm style dạng tag/badge ở đây nếu muốn */
+    font-size: 0.8rem; 
+    
 }
 
-/* Styling nút Xem dự án */
+
 .projects-section .card-body .btn-primary {
-     /* Có thể tùy chỉnh thêm màu sắc, padding cho nút */
-     /* Ví dụ: */
-     /* background-color: #007bff; */
-     /* border-color: #007bff; */
-     padding: 0.4rem 0.8rem;
-     font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
 }
 
-/* Styling phần footer card */
+
 .projects-section .card-footer {
-    background-color: #f9f9f9; /* Màu nền nhẹ cho footer */
-    border-top: 1px solid #eee; /* Đường kẻ trên footer */
+    background-color: #f9f9f9; 
+    border-top: 1px solid #eee; 
     padding: 0.75rem 1.25rem;
 }
 
@@ -183,11 +163,8 @@ a:hover {
     font-size: 0.8rem;
 }
 
-/* --- Styling cho Phân trang (Nếu cần tùy chỉnh thêm) --- */
+
 .pagination .page-link {
-    /* color: #007bff; */
 }
-.pagination .page-item.active .page-link {
-     /* background-color: #007bff; */
-     /* border-color: #007bff; */
+.pagination .page-item.active .page-link { 
 }
