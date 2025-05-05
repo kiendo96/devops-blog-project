@@ -1,0 +1,16 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.flaskenv
+*.db
+app/static/uploads/
+local_dev_uploads/
+*.log
+node_modules/
+.idea/
+.vscode/
+*.swp

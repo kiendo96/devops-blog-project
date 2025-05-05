@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <article>
+        <h1>{{ post.title }}</h1>
+        <p class="text-muted">
+            Viết bởi {{ post.author.username }} vào {{ post.timestamp.strftime('%d-%m-%Y %H:%M') }}
+        </p>
+        <hr>
+        <div>
+            {{ post.content | safe }} 
+        </div>
+    </article>
+    <hr>
+    <a href="{{ url_for('main.index') }}"> &laquo; Quay lại danh sách bài viết</a>
+{% endblock %}

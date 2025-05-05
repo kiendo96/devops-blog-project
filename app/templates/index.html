@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero-section text-center text-white bg-dark py-5">
+    <div class="container">
+        <h1 class="display-4">Welcome to my Devops Blog!</h1>
+        <p class="lead">Nơi chia sẻ kiến thức về Devops và các dự án thú vị.</p>
+        <a href="{{ url_for('main.projects') }}" class="btn btn-primary btn-lg mt-3">Xem dự án</a>
+        <a href="{{ url_for('main.contact') }}" class="btn btn-secondary btn-lg mt-3">Liên hệ</a>
+    </div>
+</section>
+
+<section class="about-snippet-section section-padding">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2>Giới thiệu nhanh</h2>
+                <p class="lead">Hello! I’m Kiendt, a DevOps engineer. This website is where I document my learning journey and share hands-on experiences. Feel free to explore my articles and projects!</p>
+                <a href="{{ url_for('main.about') }}">Tìm hiểu thêm về tôi &rarr;</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# --- 3. Bài viết Mới nhất --- #}
+<section class="latest-posts-section section-padding bg-light">
+  <div class="container">
+      <h2 class="text-center mb-4">Bài viết mới nhất</h2>
+      {% if posts %}
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+              {% for post in posts %}
+                  <div class="col">
+                      <div class="card h-100">
+                          {% if post.featured_image_url %}
+                              <a href="{{ url_for('main.post_detail', slug=post.slug) }}">
+                                  <img src="{{ post.featured_image_url }}" class="card-img-top" alt="{{ post.title }}" style="aspect-ratio: 16 / 9; object-fit: cover;">
+                              </a>
+                          {% else %}
+                              <a href="{{ url_for('main.post_detail', slug=post.slug) }}">
+                                  <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">No Image</text></svg>
+                              </a>
+                          {% endif %}
+                          <div class="card-body">
+                              <h5 class="card-title">
+                                  <a href="{{ url_for('main.post_detail', slug=post.slug) }}">{{ post.title }}</a>
+                              </h5>
+                              <p class="card-text">{{ post.content | striptags | truncate(120, True) }}</p>
+                              <a href="{{ url_for('main.post_detail', slug=post.slug) }}" class="btn btn-sm btn-outline-primary">Đọc thêm</a>
+                          </div>
+                          <div class="card-footer">
+                              <small class="text-muted">Đăng ngày: {{ post.timestamp.strftime('%d-%m-%Y') }} bởi {{ post.author.username }}</small>
+                          </div>
+                      </div>
+                  </div>
+              {% endfor %}
+          </div>
+          <div class="text-center mt-4">
+               <a href="{{ url_for('main.blog_index') }}">Xem tất cả bài viết &rarr;</a>
+          </div>
+
+      {% else %}
+          <p class="text-center">Chưa có bài viết nào.</p>
+      {% endif %}
+  </div>
+</section>
+
+<section class="featured-projects-section section-padding">
+  <div class="container">
+       <h2 class="text-center mb-4">Dự án nổi bật</h2>
+       {% if recent_projects %}
+           <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+               {% for project in recent_projects %}
+                   <div class="col">
+                       <div class="card h-100">
+                           {% if project.image_url %}
+                               <a href="{{ project.project_url or '#' }}" target="_blank" rel="noopener noreferrer">
+                                   <img src="{{ project.image_url }}" class="card-img-top" alt="{{ project.title }}" style="aspect-ratio: 16 / 9; object-fit: cover;">
+                               </a>
+                           {% else %}
+                               <a href="{{ project.project_url or '#' }}" target="_blank" rel="noopener noreferrer">
+                                   <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Project Image" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">No Image</text></svg>
+                               </a>
+                           {% endif %}
+                           <div class="card-body d-flex flex-column">
+                               <h5 class="card-title">{{ project.title }}</h5>
+                               {% if project.description %}
+                                   <p class="card-text flex-grow-1">{{ project.description | truncate(100, True) }}</p>
+                               {% endif %}
+                               {% if project.technologies %}
+                                   <p class="card-text"><small class="text-muted">Technologies: {{ project.technologies }}</small></p>
+                               {% endif %}
+                               {% if project.project_url %}
+                                   <a href="{{ project.project_url }}" class="btn btn-sm btn-outline-primary mt-auto" target="_blank" rel="noopener noreferrer">Xem dự án</a>
+                               {% endif %}
+                           </div>
+
+                           <div class="card-footer">
+                               <small class="text-muted">Cập nhật: {{ project.timestamp.strftime('%d-%m-%Y') }}</small>
+                           </div>
+                       </div>
+                   </div>
+               {% endfor %}
+           </div>
+
+           <div class="text-center mt-4">
+                <a href="{{ url_for('main.projects') }}">Xem tất cả dự án &rarr;</a>
+           </div>
+
+       {% else %}
+           <p class="text-center">Chưa có dự án nào để hiển thị.</p>
+       {% endif %}
+  </div>
+</section>
+
+{% endblock %}

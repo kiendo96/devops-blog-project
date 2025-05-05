@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{# % import 'bootstrap/wtf.html' as wtf % #}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="mb-4">{{ title }}</h1>
+            <p>Nếu bạn có bất kỳ câu hỏi hoặc phản hồi nào, vui lòng điền vào form dưới đây để gửi tin nhắn cho tôi.</p>
+            <hr>
+            <form method="POST" action="{{ url_for('main.contact') }}">
+                {{ form.hidden_tag() }}
+
+                <div class="mb-3">
+                    {{ form.name.label(class="form-label") }}
+                    {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else "")) }}
+                    {% if form.name.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.name.errors %}<span>{{ error }}</span>{% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.email.label(class="form-label") }}
+                    {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else "")) }}
+                    {% if form.email.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}<span>{{ error }}</span>{% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                 <div class="mb-3">
+                    {{ form.subject.label(class="form-label") }}
+                    {{ form.subject(class="form-control" + (" is-invalid" if form.subject.errors else "")) }}
+                    {% if form.subject.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.subject.errors %}<span>{{ error }}</span>{% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                 <div class="mb-3">
+                    {{ form.body.label(class="form-label") }}
+                    {{ form.body(class="form-control" + (" is-invalid" if form.body.errors else ""), rows=5) }}
+                    {% if form.body.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.body.errors %}<span>{{ error }}</span>{% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="d-grid">
+                     {{ form.submit(class="btn btn-primary") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

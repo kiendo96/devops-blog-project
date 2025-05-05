@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">{{ title }}</h1>
+    {% if posts %}
+        {% for post in posts %}
+            <div class="card mb-4">
+                 <div class="row g-0">
+                     <div class="col-md-4">
+                         {% if post.featured_image_url %}
+                             <a href="{{ url_for('main.post_detail', slug=post.slug) }}">
+                                 <img src="{{ post.featured_image_url }}" class="img-fluid rounded-start" alt="{{ post.title }}" style="object-fit: cover; height: 100%; width: 100%;">
+                             </a>
+                         {% else %}
+                              <a href="{{ url_for('main.post_detail', slug=post.slug) }}">
+                                 <svg class="bd-placeholder-img img-fluid rounded-start" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: No Image" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">No Image</text></svg>
+                              </a>
+                         {% endif %}
+                     </div>
+                     <div class="col-md-8">
+                         <div class="card-body">
+                             <h5 class="card-title">
+                                 <a href="{{ url_for('main.post_detail', slug=post.slug) }}">{{ post.title }}</a>
+                             </h5>
+                             <p class="card-text">{{ post.content | striptags | truncate(200, True) }}</p>
+                             <p class="card-text">
+                                 <small class="text-muted">
+                                     Đăng ngày: {{ post.timestamp.strftime('%d-%m-%Y') }} bởi {{ post.author.username }}
+                                 </small>
+                             </p>
+                             <a href="{{ url_for('main.post_detail', slug=post.slug) }}" class="btn btn-sm btn-outline-primary">Đọc thêm</a>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+        {% endfor %}
+
+        {% if pagination %}
+        <nav aria-label="Page navigation blog">
+          <ul class="pagination justify-content-center">
+            <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+              <a class="page-link" href="{{ url_for(request.endpoint, page=pagination.prev_num, **request.view_args) }}{% for key, value in request.args.items() if key != 'page' %}&{{ key }}={{ value }}{% endfor %}">Trang trước</a>
+            </li>
+            {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %} {# Tùy chỉnh số lượng nút hiển thị #}
+              {% if page_num %}
+                {% if pagination.page == page_num %}
+                  <li class="page-item active" aria-current="page"><span class="page-link">{{ page_num }}</span></li>
+                {% else %}
+                  <li class="page-item"><a class="page-link" href="{{ url_for(request.endpoint, page=page_num, **request.view_args) }}{% for key, value in request.args.items() if key != 'page' %}&{{ key }}={{ value }}{% endfor %}">{{ page_num }}</a></li>
+                {% endif %}
+              {% else %}
+                <li class="page-item disabled"><span class="page-link"><i class="fa fa-ellipsis-h">...</i></span></li>
+              {% endif %}
+            {% endfor %}
+            <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+              <a class="page-link" href="{{ url_for(request.endpoint, page=pagination.next_num, **request.view_args) }}{% for key, value in request.args.items() if key != 'page' %}&{{ key }}={{ value }}{% endfor %}">Trang sau</a>
+            </li>
+          </ul>
+        </nav>
+        {% endif %}
+
+    {% else %}
+        <p>Chưa có bài viết nào.</p>
+    {% endif %}
+</div>
+{% endblock %}

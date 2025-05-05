@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1 class="mb-4">{{ title }}</h1>
+    {% if projects %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for project in projects %}
+                <div class="col">
+                    <div class="card h-100">
+                        {% if project.image_url %}
+                            <img src="{{ project.image_url }}" class="card-img-top" alt="{{ project.title }}" style="aspect-ratio: 16 / 9; object-fit: cover;">
+                        {% else %}
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">No Image</text></svg>
+                        {% endif %}
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ project.title }}</h5>
+                            {% if project.description %}
+                                <p class="card-text flex-grow-1">{{ project.description | truncate(100, True) }}</p> {# Rút gọn mô tả #}
+                            {% endif %}
+                            {% if project.technologies %}
+                                <p class="card-text"><small class="text-muted">Technologies: {{ project.technologies }}</small></p>
+                            {% endif %}
+                            {% if project.project_url %}
+                                <a href="{{ project.project_url }}" class="btn btn-primary mt-auto" target="_blank" rel="noopener noreferrer">Xem dự án</a>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Đăng ngày: {{ project.timestamp.strftime('%d-%m-%Y') }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if pagination %}
+         <nav aria-label="Page navigation" class="mt-4">
+          <ul class="pagination justify-content-center">
+            {% if pagination.has_prev %}
+              <li class="page-item"><a class="page-link" href="{{ url_for('main.projects', page=pagination.prev_num) }}">Trang trước</a></li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">Trang trước</span></li>
+            {% endif %}
+            {% for page_num in pagination.iter_pages() %}
+              {% if page_num %}
+                {% if pagination.page == page_num %}
+                  <li class="page-item active" aria-current="page"><span class="page-link">{{ page_num }}</span></li>
+                {% else %}
+                  <li class="page-item"><a class="page-link" href="{{ url_for('main.projects', page=page_num) }}">{{ page_num }}</a></li>
+                {% endif %}
+              {% else %}
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+              {% endif %}
+            {% endfor %}
+            {% if pagination.has_next %}
+              <li class="page-item"><a class="page-link" href="{{ url_for('main.projects', page=pagination.next_num) }}">Trang sau</a></li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">Trang sau</span></li>
+            {% endif %}
+          </ul>
+        </nav>
+         {% endif %}
+
+    {% else %}
+        <p>Chưa có dự án nào được đăng.</p>
+    {% endif %}
+{% endblock %}

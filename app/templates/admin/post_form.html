@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ legend }}</h1>
+    <hr>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+            {{ form.title.label(class="form-label") }}
+            {{ form.title(class="form-control" + (" is-invalid" if form.title.errors else "")) }}
+            {% if form.title.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.title.errors %}<span>{{ error }}</span>{% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+           {{ form.featured_image_url.label(class="form-label") }}
+
+           {% if post and post.featured_image_url %}
+           <div class="mb-2">
+               <p><small>Ảnh đại diện hiện tại:</small></p>
+
+               <img src="{{ post.featured_image_url }}" alt="Ảnh hiện tại" style="max-height: 100px; max-width: 200px; object-fit: contain; border: 1px solid #ccc; padding: 2px;">
+           </div>
+           {% endif %}
+
+
+           {{ form.featured_image_url(class="form-control" + (" is-invalid" if form.featured_image_url.errors else "")) }}
+           {% if form.featured_image_url.errors %}
+               <div class="invalid-feedback" style="display: block;">
+                   {% for error in form.featured_image_url.errors %}<span>{{ error }}</span>{% endfor %}
+               </div>
+           {% endif %}
+
+           <div class="form-text">Chọn file ảnh mới (png, jpg, jpeg, gif, webp). Bỏ trống nếu không muốn thay đổi ảnh hiện tại khi sửa bài viết.</div>
+       </div>
+
+
+
+        <div class="mb-3">
+           {{ form.content.label(class="form-label") }}
+
+           {{ form.content(class="form-control" + (" is-invalid" if form.content.errors else ""), rows=15) }}
+           {% if form.content.errors %}
+               <div class="invalid-feedback" style="display: block;">
+                  {% for error in form.content.errors %}<span>{{ error }}</span>{% endfor %}
+              </div>
+           {% endif %}
+       </div>
+
+
+        <div class="mb-3">
+            {{ form.submit(class="btn btn-primary") }}
+            <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary">Hủy bỏ</a>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+
+{% endblock %}

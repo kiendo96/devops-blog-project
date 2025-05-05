@@ -1,0 +1,29 @@
+venv/
+.venv/
+
+# Bytecode và Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Git
+.git/
+.gitignore
+
+# IDE/Editor config
+.idea/
+.vscode/
+*.swp
+
+# Secrets / Environment files
+.env
+.flaskenv
+*.db
+
+# Migration scripts (có thể đưa vào nếu muốn chạy migrate trong image build)
+# migrations/ # Tạm thời bỏ qua
+
+app/static/uploads/
+
+*.log
