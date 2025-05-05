@@ -4,8 +4,9 @@ WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-ENV FLASK_APP=run.py
-# ENV FLASK_ENV=production
+# ENV FLASK_APP=run.py
+ENV FLASK_ENV=production
+
 COPY requirements.txt requirements.txt
 
 RUN pip install --no-cache-dir -r requirements.txt
